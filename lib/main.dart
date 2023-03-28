@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(CurrentMonthAppointments());
+void main() => runApp(const CurrentMonthAppointments());
 
 class CurrentMonthAppointments extends StatelessWidget {
+  const CurrentMonthAppointments({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,9 +21,9 @@ class MyApp extends StatefulWidget {
 }
 
 class ScheduleExample extends State<MyApp> {
-  CalendarDataSource _dataSource;
+  late CalendarDataSource _dataSource;
 
-  List<Appointment> _currentMonthAppointments;
+  late List<Appointment> _currentMonthAppointments;
 
   @override
   void initState() {
@@ -38,90 +37,90 @@ class ScheduleExample extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [
-          RaisedButton(
-            child: Text('Get current month appointment details'),
-            onPressed: _showDialog,
-          ),
-          Expanded(
-            child: Scrollbar(
-              child: SfCalendar(
-                view: CalendarView.month,
-                dataSource: _dataSource,
-                onViewChanged: viewChanged,
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: _showDialog,
+                child: const Text('Get current month appointment details'),
               ),
-            ),
+              Expanded(
+                child: Scrollbar(
+                  child: SfCalendar(
+                    view: CalendarView.month,
+                    dataSource: _dataSource,
+                    onViewChanged: viewChanged,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 
   _AppointmentDataSource _getCalendarDataSource() {
     List<Appointment> appointmentDetails = <Appointment>[];
 
     appointmentDetails.add(Appointment(
-        startTime: DateTime.now().add(Duration(days: 1)),
-        endTime: DateTime.now().add(Duration(days: 1, hours: 1)),
+        startTime: DateTime.now().add(const Duration(days: 1)),
+        endTime: DateTime.now().add(const Duration(days: 1, hours: 1)),
         subject: 'Meeting',
         color: Colors.red,
         isAllDay: true));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 2)),
-      endTime: DateTime.now().add(Duration(days: 2, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 2)),
+      endTime: DateTime.now().add(const Duration(days: 2, hours: 1)),
       subject: 'Planning',
       color: Colors.teal,
       startTimeZone: '',
       endTimeZone: '',
     ));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 22)),
-      endTime: DateTime.now().add(Duration(days: 22, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 22)),
+      endTime: DateTime.now().add(const Duration(days: 22, hours: 1)),
       subject: 'General Meeting',
       color: Colors.teal,
     ));
     appointmentDetails.add(Appointment(
-        startTime: DateTime.now().add(Duration(days: 1)),
-        endTime: DateTime.now().add(Duration(days: 1, hours: 1)),
+        startTime: DateTime.now().add(const Duration(days: 1)),
+        endTime: DateTime.now().add(const Duration(days: 1, hours: 1)),
         subject: 'Plan Execution',
         color: Colors.cyan,
         isAllDay: true));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 2)),
-      endTime: DateTime.now().add(Duration(days: 2, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 2)),
+      endTime: DateTime.now().add(const Duration(days: 2, hours: 1)),
       subject: 'Project Plan',
       color: Colors.tealAccent,
     ));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 22)),
-      endTime: DateTime.now().add(Duration(days: 22, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 22)),
+      endTime: DateTime.now().add(const Duration(days: 22, hours: 1)),
       subject: 'Scrum',
       color: Colors.orangeAccent,
       startTimeZone: '',
       endTimeZone: '',
     ));
     appointmentDetails.add(Appointment(
-        startTime: DateTime.now().add(Duration(days: 1)),
-        endTime: DateTime.now().add(Duration(days: 1, hours: 1)),
+        startTime: DateTime.now().add(const Duration(days: 1)),
+        endTime: DateTime.now().add(const Duration(days: 1, hours: 1)),
         subject: 'Meeting',
         color: Colors.indigo,
         isAllDay: true));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 2)),
-      endTime: DateTime.now().add(Duration(days: 2, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 2)),
+      endTime: DateTime.now().add(const Duration(days: 2, hours: 1)),
       subject: 'Support',
       color: Colors.red,
     ));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 22)),
-      endTime: DateTime.now().add(Duration(days: 22, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 22)),
+      endTime: DateTime.now().add(const Duration(days: 22, hours: 1)),
       subject: 'Performance Check',
       color: Colors.teal,
     ));
     appointmentDetails.add(Appointment(
-      startTime: DateTime.now().add(Duration(days: 22)),
-      endTime: DateTime.now().add(Duration(days: 22, hours: 1)),
+      startTime: DateTime.now().add(const Duration(days: 22)),
+      endTime: DateTime.now().add(const Duration(days: 22, hours: 1)),
       subject: 'Project Completion',
       color: Colors.yellow,
     ));
@@ -136,9 +135,9 @@ class ScheduleExample extends State<MyApp> {
 
   List<Appointment> GetVisibleAppointments(int visibleDates) {
     List<Appointment> visibleAppointment = <Appointment>[];
-    for (int j = 0; j < _dataSource.appointments.length; j++) {
-      if (visibleDates == _dataSource.appointments[j].startTime.month) {
-        visibleAppointment.add(_dataSource.appointments[j]);
+    for (int j = 0; j < _dataSource.appointments!.length; j++) {
+      if (visibleDates == _dataSource.appointments![j].startTime.month) {
+        visibleAppointment.add(_dataSource.appointments![j]);
       }
     }
     return visibleAppointment;
@@ -148,20 +147,24 @@ class ScheduleExample extends State<MyApp> {
     await showDialog(
       context: context,
       // ignore: deprecated_member_use
-      child: new AlertDialog(
+      builder: (context)=> AlertDialog(
         title: Container(
           child: Text("Visible dates contains " +
               _currentMonthAppointments.length.toString() +
               " appointments"),
         ),
         contentPadding: const EdgeInsets.all(16.0),
-        content: ListView.builder(
-            itemCount: _currentMonthAppointments.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new Text(_currentMonthAppointments[index].subject);
-            }),
+        content: Container(
+          width: 800,
+          height: 800,
+          child: ListView.builder(
+              itemCount: _currentMonthAppointments.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Text(_currentMonthAppointments[index].subject);
+              }),
+        ),
         actions: <Widget>[
-          new FlatButton(
+          TextButton(
               child: const Text('OK'),
               onPressed: () {
                 Navigator.pop(context);
